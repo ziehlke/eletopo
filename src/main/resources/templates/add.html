@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">s
+<html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Add route</title>
@@ -7,7 +7,7 @@
 <body>
 
 <h1>Add route</h1>
-<form action="#" th:action="@{/add/route}" th:object="${route}" method="post">
+<form action="#" th:action="@{/add}" th:object="${route}" method="post">
     <p>name: </p><input type="text" th:field="*{name}"/>
     <p>grade: </p>
     <select th:field="*{grade}">
@@ -17,7 +17,11 @@
         </option>
     </select>
     <p>line no: </p><input type="text" th:field="*{lineNo}"/>
-    <p>date of creation: </p><input type="text" th:field="*{dateOfCreation}"/>
+
+    <br>
+
+    <p>Creation date:</p>
+    <input type="date" th:field="*{dateOfCreation}"/>
 
 
     <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
