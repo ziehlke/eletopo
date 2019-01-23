@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">s
+<head>
+    <meta charset="UTF-8">
+    <title>Add route</title>
+</head>
+<body>
+
+<h1>Add route</h1>
+<form action="#" th:action="@{/add/route}" th:object="${route}" method="post">
+    <p>name: </p><input type="text" th:field="*{name}"/>
+    <p>grade: </p>
+    <select th:field="*{grade}">
+        <option th:each="grade : ${T(net.ddns.ziehlke.eletopo.model.Grade).values()}"
+                th:value="${grade}"
+                th:text="${grade.kurtyki}">
+        </option>
+    </select>
+    <p>line no: </p><input type="text" th:field="*{lineNo}"/>
+    <p>date of creation: </p><input type="text" th:field="*{dateOfCreation}"/>
+
+
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+</form>
+
+
+</body>
+</html>

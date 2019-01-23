@@ -22,6 +22,6 @@ public enum Grade {
     VI5PLUS("VI.5+", 11.5f),
     VI6("VI.6", 12f);
 
-    private String kurtykiReadable;
-    private float numbericRepresentation;
+    private String kurtyki;
+    private float numberic;
 }

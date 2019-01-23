@@ -1,7 +1,6 @@
 package net.ddns.ziehlke.eletopo.domain.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import net.ddns.ziehlke.eletopo.model.Grade;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -9,8 +8,11 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Getter @Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Builder
 public class RouteEntity {
     @Id
     @GeneratedValue(generator = "UUID")
