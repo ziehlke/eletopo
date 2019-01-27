@@ -6,6 +6,9 @@ import net.ddns.ziehlke.eletopo.domain.repository.RouteRepository;
 import net.ddns.ziehlke.eletopo.model.Route;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class RouteService {
@@ -31,9 +34,12 @@ public class RouteService {
                 .build();
     }
 
-
-    public void save (Route route) {
+    public void save(Route route) {
         routeRepository.save(map(route));
+    }
+
+    public List<Route> findAll() {
+        return routeRepository.findAll().stream().map(this::map).collect(Collectors.toList());
     }
 
 }

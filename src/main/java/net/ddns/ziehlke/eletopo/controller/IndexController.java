@@ -1,30 +1,19 @@
 package net.ddns.ziehlke.eletopo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
+import lombok.AllArgsConstructor;
+import net.ddns.ziehlke.eletopo.service.RouteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Date;
-
 @Controller
+@AllArgsConstructor
 public class IndexController {
-    private String appMode;
-
-    @Autowired
-    public IndexController(Environment environment){
-        appMode = environment.getProperty("app-mode");
-    }
+    private final RouteService routeService;
 
     @RequestMapping("/")
     public String index(Model model){
-        model.addAttribute("datetime", new Date());
-        model.addAttribute("username", "@omeryazir");
-        model.addAttribute("projectname", "WebApp");
-
-        model.addAttribute("mode", appMode);
-
+        model.addAttribute("routes", routeService.findAll());
         return "index";
     }
 }
