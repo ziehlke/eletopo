@@ -1,7 +1,11 @@
 package net.ddns.ziehlke.eletopo.domain.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import net.ddns.ziehlke.eletopo.model.Grade;
+import net.ddns.ziehlke.eletopo.model.Route;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -21,7 +25,8 @@ public class RouteEntity {
     private String name;
     @Enumerated(EnumType.ORDINAL)
     private Grade grade;
-    private int lineNo;
+    @Enumerated(EnumType.ORDINAL)
+    private Route.LineNo lineNo;
     private LocalDate dateOfCreation;
-
+    private String color;
 }

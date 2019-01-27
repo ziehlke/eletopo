@@ -17,6 +17,7 @@ public class RouteService {
                 .grade(routeEntity.getGrade())
                 .lineNo(routeEntity.getLineNo())
                 .dateOfCreation(routeEntity.getDateOfCreation())
+                .color(routeEntity.getColor())
                 .build();
     }
 
@@ -26,6 +27,7 @@ public class RouteService {
                 .grade(route.getGrade())
                 .lineNo(route.getLineNo())
                 .dateOfCreation(route.getDateOfCreation())
+                .color(route.getColor())
                 .build();
     }
 

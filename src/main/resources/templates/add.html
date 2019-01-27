@@ -8,25 +8,44 @@
 
 <h1>Add route</h1>
 <form action="#" th:action="@{/add}" th:object="${route}" method="post">
-    <p>name: </p><input type="text" th:field="*{name}"/>
-    <p>grade: </p>
+
+    <ul>
+        <li th:each="e : ${#fields.detailedErrors()}">
+            <span th:text="${e.global} ? '*' : ${e.fieldName}">The field name</span> -->
+            <span th:text="${e.message}">The error message</span>
+        </li>
+    </ul>
+
+
+    <p>Route name: </p><input type="text" th:field="*{name}"/>
+    <p>Grade: </p>
     <select th:field="*{grade}">
         <option th:each="grade : ${T(net.ddns.ziehlke.eletopo.model.Grade).values()}"
                 th:value="${grade}"
                 th:text="${grade.kurtyki}">
         </option>
     </select>
-    <p>line no: </p><input type="text" th:field="*{lineNo}"/>
+
+    <p>Line no: </p>
+    <select th:field="*{lineNo}">
+        <option th:each="lineNo : ${T(net.ddns.ziehlke.eletopo.model.Route.LineNo).values()}"
+                th:value="${lineNo}"
+                th:text="${lineNo.lineNo}">
+        </option>
+    </select>
 
     <br>
 
-    <p>Creation date:</p>
-    <input type="date" th:field="*{dateOfCreation}"/>
+    <p>Creation date: </p>
+    <input type="date"
+           min="2004-09-18"
+           th:max="${#temporals.format(localDate, 'yyyy-MM-dd')}"
+           th:field="*{dateOfCreation}"/>
 
+    <p>color: <input type="color" th:field="*{color}"/></p>
 
     <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
 </form>
-
 
 </body>
 </html>
