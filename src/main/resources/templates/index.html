@@ -27,7 +27,7 @@
     </tr>
     <tr th:each="route : ${routes}">
         <td><span th:text="${route.name}"> Route name </span></td>
-        <td><span th:text="${route.grade}"> Grade </span></td>
+        <td><span th:text="${route.getAuthorGrade}"> Grade </span></td>
         <td><span th:text="${route.lineNo}"> Line number </span></td>
         <td><span th:text="${route.dateOfCreation}"> Date of creation </span></td>
         <td><span th:text="${route.color}"> Color </span></td>

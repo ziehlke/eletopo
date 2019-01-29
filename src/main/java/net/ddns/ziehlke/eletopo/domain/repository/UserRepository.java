@@ -1,6 +1,6 @@
 package net.ddns.ziehlke.eletopo.domain.repository;
 
-import net.ddns.ziehlke.eletopo.domain.entity.UserEntity;
+import net.ddns.ziehlke.eletopo.domain.model.UserEntity;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

@@ -7,18 +7,6 @@
 <h1 th:text="#{label.form.register}">form</h1>
 <form action="#" th:action="@{/register}" th:object="${user}" method="POST">
     <div>
-        <label th:text="#{label.user.firstName}">first</label>
-        <input th:field="*{firstName}"/>
-        <p th:each="error: ${#fields.errors('firstName')}"
-           th:text="${error}">Validation error</p>
-    </div>
-    <div>
-        <label th:text="#{label.user.lastName}">last</label>
-        <input th:field="*{lastName}"/>
-        <p th:each="error : ${#fields.errors('lastName')}"
-           th:text="${error}">Validation error</p>
-    </div>
-    <div>
         <label th:text="#{label.user.email}">email</label>
         <input type="email" th:field="*{email}"/>
         <p th:each="error : ${#fields.errors('email')}"

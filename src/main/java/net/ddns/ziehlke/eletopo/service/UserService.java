@@ -1,7 +1,7 @@
 package net.ddns.ziehlke.eletopo.service;
 
 import lombok.AllArgsConstructor;
-import net.ddns.ziehlke.eletopo.domain.entity.UserEntity;
+import net.ddns.ziehlke.eletopo.domain.model.UserEntity;
 import net.ddns.ziehlke.eletopo.domain.repository.UserRepository;
 import net.ddns.ziehlke.eletopo.model.UserDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,16 +17,12 @@ public class UserService {
 
     public UserDto map(UserEntity userEntity) {
         return UserDto.builder()
-                .firstName(userEntity.getFirstName())
-                .lastName(userEntity.getLastName())
                 .email(userEntity.getEmail())
                 .build();
     }
 
     public UserEntity map(UserDto userDto) {
         return UserEntity.builder()
-                .firstName(userDto.getFirstName())
-                .lastName(userDto.getLastName())
                 .email(userDto.getEmail())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .build();

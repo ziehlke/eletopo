@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Builder
 public class Route {
     private String name;
-    private Grade grade;
+    private Grade authorGrade;
     private LineNo lineNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfCreation = LocalDate.now();

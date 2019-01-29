@@ -2,7 +2,7 @@ package net.ddns.ziehlke.eletopo.service;
 
 
 import lombok.RequiredArgsConstructor;
-import net.ddns.ziehlke.eletopo.domain.entity.UserEntity;
+import net.ddns.ziehlke.eletopo.domain.model.UserEntity;
 import net.ddns.ziehlke.eletopo.domain.repository.UserRepository;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
