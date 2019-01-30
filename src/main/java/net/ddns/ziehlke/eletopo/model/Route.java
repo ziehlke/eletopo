@@ -11,11 +11,13 @@ import java.time.LocalDate;
 @Builder
 public class Route {
     private String name;
+    private String author;
     private Grade authorGrade;
     private LineNo lineNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfCreation = LocalDate.now();
     private String color;
+    private boolean active;
 
     @Getter
     @AllArgsConstructor

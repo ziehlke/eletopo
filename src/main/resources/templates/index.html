@@ -4,36 +4,66 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <title>Eletopo</title>
 
 </head>
 <body>
+<div class="container">
 
-<h3 th:text="${username}"></h3>
-<table>
-    <thead>
-    <tr>
-        <th> Route name</th>
-        <th> Grade</th>
-        <th> Line number</th>
-        <th> Date of creation</th>
-        <th> Color</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:if="${routes.empty}">
-        <td colspan="2"> No routes available</td>
-    </tr>
-    <tr th:each="route : ${routes}">
-        <td><span th:text="${route.name}"> Route name </span></td>
-        <td><span th:text="${route.getAuthorGrade}"> Grade </span></td>
-        <td><span th:text="${route.lineNo}"> Line number </span></td>
-        <td><span th:text="${route.dateOfCreation}"> Date of creation </span></td>
-        <td><span th:text="${route.color}"> Color </span></td>
-    </tr>
-    </tbody>
-</table>
+    <h3 th:text="${username}"></h3>
 
+
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Route name</th>
+            <th scope="col">Route author</th>
+            <th scope="col">Author's grade</th>
+            <th scope="col">Your grade</th>
+            <th scope="col">Line number</th>
+            <th scope="col">Date of creation</th>
+            <th scope="col">Color</th>
+        </tr>
+
+        </thead>
+
+        <tbody>
+        <tr th:if="${routes.empty}">
+            <td colspan="2"> No routes available</td>
+        </tr>
+
+        <tr th:each="route : ${routes}">
+            <th scope="row"><span th:text="${route.name}"> Route name </span></th>
+            <td><span th:text="${route.author}"> Route author </span></td>
+            <td><span th:text="${route.authorGrade.getKurtyki()}"> Author's grade </span></td>
+
+            <td>
+                <select>
+                    <option th:each="grade : ${T(net.ddns.ziehlke.eletopo.model.Grade).values()}"
+                            th:value="${grade}"
+                            th:text="${grade.kurtyki}">
+                    </option>
+                </select>
+            </td>
+
+            <td><span th:text="${route.lineNo.lineNo}"> Line number </span></td>
+            <td><span th:text="${route.dateOfCreation}"> Date of creation </span></td>
+            <td th:bgcolor="${route.color}"></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js"
+        integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP"
+        crossorigin="anonymous"></script>
 </body>
 </html>
