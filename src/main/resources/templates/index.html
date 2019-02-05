@@ -19,32 +19,6 @@ Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]<
 </div>
 
 
-<table>
-    <thead>
-    <tr>
-        <th> Route name</th>
-        <th> Grade</th>
-        <th> Line number</th>
-        <th> Date of creation</th>
-        <th> Color</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:if="${routes.empty}">
-        <td colspan="2"> No routes available</td>
-    </tr>
-    <tr th:each="route : ${routes}">
-        <td><span th:text="${route.name}"> Route name </span></td>
-        <td><span th:text="${route.grade}"> Grade </span></td>
-        <td><span th:text="${route.lineNo}"> Line number </span></td>
-        <td><span th:text="${route.dateOfCreation}"> Date of creation </span></td>
-        <td><span th:text="${route.color}"> Color </span></td>
-    </tr>
-    </tbody>
-</table>
-    <h3 th:text="${username}"></h3>
-
-
     <table class="table table-striped table-hover">
         <thead class="thead-dark">
         <tr>
