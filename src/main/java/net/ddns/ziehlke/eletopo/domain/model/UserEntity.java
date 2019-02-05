@@ -21,8 +21,6 @@ public class UserEntity {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-    private String firstName;
-    private String lastName;
     private String password;
     private String email;
 }

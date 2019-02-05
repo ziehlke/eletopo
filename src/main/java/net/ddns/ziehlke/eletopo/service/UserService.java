@@ -1,19 +1,21 @@
 package net.ddns.ziehlke.eletopo.service;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import net.ddns.ziehlke.eletopo.domain.model.UserEntity;
 import net.ddns.ziehlke.eletopo.domain.repository.UserRepository;
 import net.ddns.ziehlke.eletopo.model.UserDto;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public UserDto map(UserEntity userEntity) {
         return UserDto.builder()
@@ -28,16 +30,16 @@ public class UserService {
                 .build();
     }
 
-    public UserDto save(UserDto userDto) {
-        if (findByEmail(userDto.getEmail()).isPresent()) {
-            throw new RuntimeException("User already registered!");
+    public UserDto save(UserDto userDto) throws Exception {
+        if (null == userRepository.findByEmail(userDto.getEmail())) {
+            return map(userRepository.save(map(userDto)));
+        } else {
+            throw new Exception("User already exists");
         }
-        return map(userRepository.save(map(userDto)));
     }
 
-
-    public Optional<UserDto> findByEmail(String email) {
-        return userRepository.findByEmail(email).map(this::map);
+    public UserDto findByEmail(String email) {
+        return map(userRepository.findByEmail(email));
     }
 
 }
