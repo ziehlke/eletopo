@@ -17,7 +17,7 @@ public class Route {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfCreation = LocalDate.now();
     private String color;
-    private boolean active;
+    private boolean active = true;
 
     @Getter
     @AllArgsConstructor

@@ -21,34 +21,63 @@
         </ul>
 
 
-        <p>Route name: </p><input type="text" th:field="*{name}"/>
-        <p>Grade: </p>
-        <select th:field="*{authorGrade}">
-            <option th:each="grade : ${T(net.ddns.ziehlke.eletopo.model.Grade).values()}"
-                    th:value="${grade}"
-                    th:text="${grade.kurtyki}">
-            </option>
-        </select>
+        <div class="form-group">
+            <label for="routeName">Route name</label>
+            <input type="text" th:field="*{name}" class="form-control" id="routeName" aria-describedby="routeNameHelp"
+                   placeholder="Enter route name">
+        </div>
 
-        <p>Line no: </p>
-        <select th:field="*{lineNo}">
-            <option th:each="lineNo : ${T(net.ddns.ziehlke.eletopo.model.Route.LineNo).values()}"
-                    th:value="${lineNo}"
-                    th:text="${lineNo.lineNo}">
-            </option>
-        </select>
+        <div class="form-group">
+            <label for="routeAuthor">Route author</label>
+            <input type="text" th:field="*{author}" class="form-control" id="routeAuthor"
+                   aria-describedby="routeAuthorHelp" placeholder="Enter route author name">
+        </div>
 
-        <br>
 
-        <p>Creation date: </p>
-        <input type="date"
-               min="2004-09-18"
-               th:max="${#temporals.format(localDate, 'yyyy-MM-dd')}"
-               th:field="*{dateOfCreation}"/>
+        <div class="form-group">
+            <label for="routeGrade">Grade</label>
+            <select th:field="*{authorGrade}" class="form-control" id="routeGrade">
+                <option th:each="grade : ${T(net.ddns.ziehlke.eletopo.model.Grade).values()}"
+                        th:value="${grade}"
+                        th:text="${grade.kurtyki}">
+                </option>
+            </select>
+        </div>
 
-        <p>color: <input type="color" th:field="*{color}"/></p>
 
-        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+        <div class="form-group">
+            <label for="lineNumber">Line number</label>
+            <select th:field="*{lineNo}" class="form-control" id="lineNumber">
+                <option th:each="lineNo : ${T(net.ddns.ziehlke.eletopo.model.Route.LineNo).values()}"
+                        th:value="${lineNo}"
+                        th:text="${lineNo.lineNo}">
+                </option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="creationDate">Creation date</label>
+            <input type="date"
+                   min="2004-09-18"
+                   th:max="${#temporals.format(localDate, 'yyyy-MM-dd')}"
+                   th:field="*{dateOfCreation}"
+                   class="form-control" id="creationDate" aria-describedby="routeCreationDateHelp"/>
+        </div>
+
+
+        <div class="form-group">
+            <label for="Color">Color</label>
+            <input type="color" th:field="*{color}" class="form-control" id="Color" aria-describedby="routeColorHelp"/>
+        </div>
+
+        <div class="custom-control custom-switch form-group">
+            <input type="checkbox" class="custom-control-input" id="customSwitch1" th:checked="*{active}">
+            <label class="custom-control-label" for="customSwitch1">Route is active</label>
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Submit"/>
+
     </form>
 </div>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"

@@ -44,7 +44,8 @@ Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]<
             <td><span th:text="${route.authorGrade.getKurtyki()}"> Author's grade </span></td>
 
             <td>
-                <select>
+                <select class="bootstrap-select">
+                    <option selected>-</option>
                     <option th:each="grade : ${T(net.ddns.ziehlke.eletopo.model.Grade).values()}"
                             th:value="${grade}"
                             th:text="${grade.kurtyki}">
