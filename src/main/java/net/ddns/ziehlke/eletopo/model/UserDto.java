@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.ddns.ziehlke.eletopo.validation.PasswordMatches;
+import net.ddns.ziehlke.eletopo.validation.ValidEmail;
+import net.ddns.ziehlke.eletopo.validation.ValidPassword;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -13,22 +15,17 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@PasswordMatches
 public class UserDto {
     @NotNull
     @NotEmpty
-    private String firstName;
-
-    @NotNull
-    @NotEmpty
-    private String lastName;
-
-    @NotNull
-    @NotEmpty
+    @ValidPassword
     private String password;
+    private String matchingPassword;
 
     @NotNull
     @NotEmpty
-    @Email
+    @ValidEmail
     private String email;
 }
 

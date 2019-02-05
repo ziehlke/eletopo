@@ -14,16 +14,8 @@ public class IndexController {
     private final RouteService routeService;
 
     @GetMapping("/")
-    public String index(Model model, Principal principal) {
+    public String index(Model model) {
         model.addAttribute("routes", routeService.findAll());
-        String username;
-        try {
-            username = principal.getName();
-        } catch (NullPointerException e)
-        {
-            username = "";
-        }
-        model.addAttribute("username", username);
         return "index";
     }
 }

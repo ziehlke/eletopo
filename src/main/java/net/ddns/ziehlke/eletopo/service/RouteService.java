@@ -1,7 +1,7 @@
 package net.ddns.ziehlke.eletopo.service;
 
 import lombok.RequiredArgsConstructor;
-import net.ddns.ziehlke.eletopo.domain.entity.RouteEntity;
+import net.ddns.ziehlke.eletopo.domain.model.RouteEntity;
 import net.ddns.ziehlke.eletopo.domain.repository.RouteRepository;
 import net.ddns.ziehlke.eletopo.model.Route;
 import org.springframework.stereotype.Service;

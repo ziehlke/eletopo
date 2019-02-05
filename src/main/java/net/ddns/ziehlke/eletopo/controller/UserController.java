@@ -23,7 +23,12 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUserAccount(@ModelAttribute("user") UserDto userDto) {
-        userService.save(userDto);
+        try {
+            userService.save(userDto);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
         return "redirect:/";
     }
 

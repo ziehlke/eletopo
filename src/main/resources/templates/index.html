@@ -10,7 +10,12 @@
 </head>
 <body>
 
-<h3 th:text="${username}"></h3>
+<div sec:authorize="isAuthenticated()">
+Logged user: <span sec:authentication="name">username</span>
+Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+</div>
+
+
 <table>
     <thead>
     <tr>

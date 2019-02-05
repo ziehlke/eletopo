@@ -1,4 +1,4 @@
-package net.ddns.ziehlke.eletopo.domain.entity;
+package net.ddns.ziehlke.eletopo.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

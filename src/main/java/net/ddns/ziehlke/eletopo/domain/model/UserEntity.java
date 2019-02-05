@@ -1,4 +1,4 @@
-package net.ddns.ziehlke.eletopo.domain.entity;
+package net.ddns.ziehlke.eletopo.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,8 +21,6 @@ public class UserEntity {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-    private String firstName;
-    private String lastName;
     private String password;
     private String email;
 }
