@@ -15,14 +15,13 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("routes", routeService.findAll());
+        model.addAttribute("routes", routeService.findAllByActiveIsTrue());
         return "index";
     }
 
     @GetMapping("/archive")
-    public String archive(Model model, Principal principal) {
+    public String archive(Model model) {
         model.addAttribute("routes", routeService.findAllByActiveIsFalse());
-        model.addAttribute("username", "");
         return "index";
     }
 }
