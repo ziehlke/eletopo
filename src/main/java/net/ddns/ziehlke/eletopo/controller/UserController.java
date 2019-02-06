@@ -23,11 +23,11 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUserAccount(@ModelAttribute("user") UserDto userDto) {
+        System.out.println("------ regiter POST received -----------");
         try {
             userService.save(userDto);
         } catch (Exception e) {
             e.printStackTrace();
-
         }
         return "redirect:/";
     }

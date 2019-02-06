@@ -6,41 +6,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
-    <div>
-        <h1 th:text="#{label.form.register}">form</h1>
-        <br/>
-        <form action="/" method="POST" enctype="utf8">
-            <div class="form-group row">
-                <label class="col-sm-3" th:text="#{label.user.email}">email</label>
-                <span class="col-sm-5"><input type="email" class="form-control" name="email" value=""
-                                              required="required"/></span>
-                <span id="emailError" class="alert alert-danger col-sm-4" style="display:none"></span>
+    <div class="row">
+        <div class="col-sm-8 col-md-6 col-lg-5 mx-auto">
+            <div class="card my-4">
+                <article class="card-body">
+                    <a href="/login" class="float-right btn btn-outline-primary">Sign in</a>
+                    <h4 class="card-title mb-4 mt-1">Sign up</h4>
+                    <hr>
+                    <form action="#" th:action="@{/register}" th:object="${user}" method="POST" enctype="utf8">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-user"></i> </span>
+                                </div>
+                                <input th:field="*{email}" name="username" class="form-control" placeholder="e-mail"
+                                       type="email"
+                                       required="required"/>
+                                <span id="emailError" class="alert alert-danger col-sm-4" style="display:none"
+                                      th:each="error : ${#fields.errors('email')}"
+                                      th:text="${error}"></span>
+                            </div>
+                        </div>
 
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-key"></i> </span>
+                                </div>
+                                <input th:field="*{password}" name="password" class="form-control"
+                                       placeholder="password" type="password"
+                                       required="required"/>
+                                <span id="passwordError" class="alert alert-danger col-sm-4" style="display:none"
+                                      th:each="error : ${#fields.errors('password')}"
+                                      th:text="${error}"></span>
+                            </div> <!-- input-group.// -->
+                        </div> <!-- form-group// -->
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-key"></i> </span>
+                                </div>
+                                <input th:field="*{matchingPassword}" name="matchPassword" class="form-control"
+                                       placeholder="confirm password"
+                                       type="password"
+                                       required="required"/>
+                                <span id="globalError" class="alert alert-danger col-sm-4" style="display:none"></span>
+                            </div> <!-- input-group.// -->
+                        </div> <!-- form-group// -->
+
+
+                        <div class="form-group">
+                            <button name="submit" type="submit" class="btn btn-primary btn-block">Register</button>
+                        </div> <!-- form-group// -->
+                    </form>
+                </article>
             </div>
-            <div class="form-group row">
-                <label class="col-sm-3" th:text="#{label.user.password}">password</label>
-                <span class="col-sm-5"><input id="password" class="form-control" name="password" value=""
-                                              type="password" required="required"/></span>
-                <span id="passwordError" class="alert alert-danger col-sm-4" style="display:none"></span>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3" th:text="#{label.user.confirmPass}">confirm</label>
-                <span class="col-sm-5"><input id="matchPassword" class="form-control" name="matchingPassword" value=""
-                                              type="password" required="required"/></span>
-                <span id="globalError" class="alert alert-danger col-sm-4" style="display:none"></span>
-            </div>
-            <br/>
-            <button type="submit" class="btn btn-primary" th:text="#{label.form.submit}">submit</button>
-        </form>
-        <br/>
-        <a th:href="@{/login}" th:text="#{label.form.loginLink}">login</a>
+        </div>
     </div>
-</div>
-
-
 </div>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
