@@ -29,16 +29,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/register", "/add").permitAll()
-//                .antMatchers("/add").hasRole("USER")
-                .anyRequest().authenticated()
+                    .antMatchers("/route**").hasRole("ADMIN")
+                    .antMatchers("/anonymous*").anonymous()
+                    .antMatchers("/", "/login*", "/register").permitAll()
+                    .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .permitAll()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/", true)
+                    .permitAll()
                 .and()
                 .logout()
-                .permitAll();
+                    .deleteCookies("JSESSIONID")
+                    .permitAll();
     }
 
     //TODO: delete this configuration in productive environment
