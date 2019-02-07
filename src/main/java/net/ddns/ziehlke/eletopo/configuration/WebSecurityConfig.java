@@ -20,8 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService UserDetailsService;
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(UserDetailsService);
+    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authProvider());
     }
 

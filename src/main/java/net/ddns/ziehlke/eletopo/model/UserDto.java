@@ -8,8 +8,8 @@ import net.ddns.ziehlke.eletopo.validation.PasswordMatches;
 import net.ddns.ziehlke.eletopo.validation.ValidEmail;
 import net.ddns.ziehlke.eletopo.validation.ValidPassword;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
@@ -17,14 +17,14 @@ import javax.validation.constraints.NotNull;
 @Builder
 @PasswordMatches
 public class UserDto {
-    @NotNull
-    @NotEmpty
     @ValidPassword
+    @Size(min = 6, max = 30)
     private String password;
+
+    @Size(min = 6, max = 30)
     private String matchingPassword;
 
     @NotNull
-    @NotEmpty
     @ValidEmail
     private String email;
 }

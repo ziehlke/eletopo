@@ -4,12 +4,13 @@ import lombok.RequiredArgsConstructor;
 import net.ddns.ziehlke.eletopo.domain.model.UserEntity;
 import net.ddns.ziehlke.eletopo.domain.repository.UserRepository;
 import net.ddns.ziehlke.eletopo.model.UserDto;
+import net.ddns.ziehlke.eletopo.validation.EmailExistsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements IUserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -26,16 +27,17 @@ public class UserService {
                 .build();
     }
 
-    public UserDto save(UserDto userDto) throws Exception {
+    @Override
+    public UserDto save(UserDto userDto) throws EmailExistsException {
         if (null == userRepository.findByEmail(userDto.getEmail())) {
             return map(userRepository.save(map(userDto)));
         } else {
-            throw new Exception("User already exists");
+            throw new EmailExistsException("Given e-mail is already registered");
         }
     }
 
-    public UserDto findByEmail(String email) {
-        return map(userRepository.findByEmail(email));
-    }
+//    public UserDto findByEmail(String email) {
+//        return map(userRepository.findByEmail(email));
+//    }
 
 }
