@@ -9,13 +9,14 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.UUID;
+import javax.persistence.OneToMany;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Builder
+@Entity
 public class UserEntity {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -23,4 +24,7 @@ public class UserEntity {
     private UUID id;
     private String password;
     private String email;
+
+    @OneToMany(mappedBy = "userEntity")
+    private Set<VoteEntity> votes = new HashSet<>();
 }

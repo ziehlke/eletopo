@@ -10,13 +10,13 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.UUID;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Builder
+@Entity
 public class RouteEntity {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -31,4 +31,7 @@ public class RouteEntity {
     private LocalDate dateOfCreation;
     private String color;
     private boolean active;
+
+    @OneToMany(mappedBy = "routeEntity")
+    private Set<VoteEntity> votes = new HashSet<>();
 }
