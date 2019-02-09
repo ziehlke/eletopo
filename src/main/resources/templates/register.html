@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-md-6 col-lg-5 mx-auto">
+            <div class="card my-4">
+                <article class="card-body">
+                    <a href="/login" class="float-right btn btn-outline-primary">Sign in</a>
+                    <h4 class="card-title mb-4 mt-1">Sign up</h4>
+                    <hr>
+                    <form action="#" th:action="@{/register}" th:object="${user}" method="POST" enctype="utf8">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-user"></i> </span>
+                                </div>
+                                <input th:field="*{email}" name="username" class="form-control" placeholder="e-mail"
+                                       type="email"
+                                       required="required"/>
+                                <div class="alert alert-danger col-12" role="alert" th:each="error : ${#fields.errors('email')}"
+                                     th:text="${error}">Validation error
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-key"></i> </span>
+                                </div>
+                                <input th:field="*{password}" name="password" class="form-control"
+                                       placeholder="password" type="password"
+                                       required="required"/>
+                                <small id="passwordHelp" class="form-text text-muted p-0 col-12">At least 6 characters.
+                                    Must
+                                    include an uppercase, a lowercase and a digit.
+                                </small>
+                                <div class="alert alert-danger col-12" role="alert" th:each="error : ${#fields.errors('password')}"
+                                     th:text="${error}">Validation error
+                                </div>
+                            </div> <!-- input-group.// -->
+                        </div> <!-- form-group// -->
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fas fa-key"></i> </span>
+                                </div>
+                                <input th:field="*{matchingPassword}" name="matchingPassword" class="form-control"
+                                       placeholder="confirm password" type="password"
+                                       required="required"/>
+                                <small id="matchingPasswordHelp" class="form-text text-muted p-0 col-12">Re-type your
+                                    password.
+                                </small>
+                                <div class="alert alert-danger col-12" role="alert" th:each="error : ${#fields.globalErrors()}"
+                                     th:text="${error}">Validation error
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button name="submit" type="submit" class="btn btn-primary btn-block">Register</button>
+                        </div> <!-- form-group// -->
+                    </form>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js"
+        integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP"
+        crossorigin="anonymous"></script>
+</body>
+</html>

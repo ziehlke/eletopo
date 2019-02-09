@@ -1,4 +1,4 @@
-package net.ddns.ziehlke.eletopo.domain.entity;
+package net.ddns.ziehlke.eletopo.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,10 +23,12 @@ public class RouteEntity {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
     private String name;
+    private String author;
     @Enumerated(EnumType.ORDINAL)
-    private Grade grade;
+    private Grade authorGrade;
     @Enumerated(EnumType.ORDINAL)
     private Route.LineNo lineNo;
     private LocalDate dateOfCreation;
     private String color;
+    private boolean active;
 }
