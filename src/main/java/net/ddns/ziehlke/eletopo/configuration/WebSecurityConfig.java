@@ -1,6 +1,8 @@
 package net.ddns.ziehlke.eletopo.configuration;
 
 import lombok.RequiredArgsConstructor;
+import net.ddns.ziehlke.eletopo.service.IUserService;
+import net.ddns.ziehlke.eletopo.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -17,19 +19,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final UserDetailsService UserDetailsService;
+//    private final UserService UserDetailsService;
 
     @Override
-    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(final AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(authProvider());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // @formatter:off
         http
                 .authorizeRequests()
                     .antMatchers("/route**").hasRole("ADMIN")
-                    .antMatchers("/anonymous*").anonymous()
                     .antMatchers("/", "/login*", "/register").permitAll()
                     .anyRequest().authenticated()
                 .and()
@@ -41,11 +43,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                     .deleteCookies("JSESSIONID")
                     .permitAll();
+        // @formatter:on
     }
 
     //TODO: delete this configuration in productive environment
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         web
                 .ignoring()
                 .antMatchers("/h2/**");
@@ -53,15 +56,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-
-    @Bean
     public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(UserDetailsService);
+        authProvider.setUserDetailsService(userDetails());
         authProvider.setPasswordEncoder(encoder());
         return authProvider;
     }
@@ -70,5 +67,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder(11);
+    }
+
+
+    @Bean
+    public IUserService userDetails() {
+        return new UserService(null, encoder());
     }
 }

@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface RouteRepository extends JpaRepository<RouteEntity, UUID> {
-    public List<RouteEntity> findAllByActiveIsTrue();
-    public List<RouteEntity> findAllByActiveIsFalse();
+    List<RouteEntity> findAllByActiveIsTrue();
+    List<RouteEntity> findAllByActiveIsFalse();
 }

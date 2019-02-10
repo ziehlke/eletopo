@@ -13,10 +13,10 @@
 <body>
 <div class="container">
 
-<div sec:authorize="isAuthenticated()">
-Logged user: <span sec:authentication="name">username</span>
-Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
-</div>
+    <div sec:authorize="isAuthenticated()">
+        Logged user: <span sec:authentication="name">username</span>
+        Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+    </div>
 
 
     <table class="table table-striped table-hover">
@@ -35,7 +35,7 @@ Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]<
 
         <tbody>
         <tr th:if="${routes.empty}">
-            <td colspan="2"> No routes available</td>
+            <td colspan="7"> No routes available</td>
         </tr>
 
         <tr th:each="route : ${routes}">
@@ -44,17 +44,23 @@ Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]<
             <td><span th:text="${route.authorGrade.getKurtyki()}"> Author's grade </span></td>
 
             <td>
-                <select class="bootstrap-select">
-                    <option selected>-</option>
-                    <option th:each="grade : ${T(net.ddns.ziehlke.eletopo.model.Grade).values()}"
-                            th:value="${grade}"
-                            th:text="${grade.kurtyki}">
-                    </option>
-                </select>
+                <form action="#" th:action="@{/}" th:object="${vote}" method="post">
+                    <div class="form-group">
+                        <span th:name="*{route}" th:value="${route}"></span>
+                        <!--<span th:name="*{route}" th:value=sec:authentication="name"></span>-->
+                        <select th:field="*{userGrade}" class="form-control" onchange="this.form.submit()">
+                            <option value="">-</option>
+                            <option th:each="grade : ${T(net.ddns.ziehlke.eletopo.model.Grade).values()}"
+                                    th:value="${grade}"
+                                    th:text="${grade.kurtyki}">
+                            </option>
+                        </select>
+                    </div>
+                </form>
             </td>
 
             <td><span th:text="${route.lineNo.lineNo}"> Line number </span></td>
-            <td><span th:text="${route.dateOfCreation}"> Date of creation </span></td>
+            <td><span class="text-muted" th:text="${route.dateOfCreation}"> Date of creation </span></td>
             <td th:bgcolor="${route.color}"></td>
         </tr>
 

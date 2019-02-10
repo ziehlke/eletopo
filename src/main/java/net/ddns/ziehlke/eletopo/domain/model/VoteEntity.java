@@ -1,5 +1,6 @@
 package net.ddns.ziehlke.eletopo.domain.model;
 
+import lombok.Builder;
 import lombok.Data;
 import net.ddns.ziehlke.eletopo.model.Grade;
 
@@ -8,8 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
-@Entity
 @Data
+@Builder
+@Entity
 public class VoteEntity {
     @EmbeddedId
     private VoteEntityID id;
