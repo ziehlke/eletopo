@@ -40,26 +40,22 @@
 
         <tr th:each="route : ${routes}">
             <th scope="row" th:text="${route.name}"> Route name</th>
-            <td th:text="${route.author}"> Route author </td>
-            <td th:text="${route.authorGrade.getKurtyki()}"> Author's grade </td>
+            <td th:text="${route.author}"> Route author</td>
+            <td th:text="${route.authorGrade.getKurtyki()}"> Author's grade</td>
 
             <td>
-                <form action="#" th:action="@{/}" th:object="${vote}" method="post">
-                    <div class="form-group">
-                        <!--<span th:name="*{route}" th:value="${route}"></span>-->
-                        <!--<span th:name="*{route}" th:value= ${th:object="${route}}"></span>-->
-                        <select th:field="*{userGrade}" class="form-control" onchange="this.form.submit()">
-                            <option value="">-</option>
-                            <option th:each="grade : ${T(net.ddns.ziehlke.eletopo.model.Grade).values()}"
-                                    th:value="${grade}"
-                                    th:text="${grade.kurtyki}">
-                            </option>
-                        </select>
-                    </div>
+                <form action="#" th:action="@{/}" th:object="${vote}" method="post" th:name="route" th:value="${route}">
+                    <select th:field="*{userGrade}" class="form-control" onchange="this.form.submit()">
+                        <option value="">-</option>
+                        <option th:each="grade : ${T(net.ddns.ziehlke.eletopo.model.Grade).values()}"
+                                th:value="${grade}"
+                                th:text="${grade.kurtyki}">
+                        </option>
+                    </select>
                 </form>
             </td>
 
-            <td th:text="${route.lineNo.lineNo}"> Line number </td>
+            <td th:text="${route.lineNo.lineNo}"> Line number</td>
             <td class="text-muted" th:text="${route.dateOfCreation}"> Date of creation</td>
             <td th:bgcolor="${route.color}"></td>
         </tr>
