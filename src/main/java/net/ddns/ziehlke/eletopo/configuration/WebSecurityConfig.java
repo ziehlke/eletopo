@@ -1,6 +1,7 @@
 package net.ddns.ziehlke.eletopo.configuration;
 
 import lombok.RequiredArgsConstructor;
+import net.ddns.ziehlke.eletopo.domain.repository.UserRepository;
 import net.ddns.ziehlke.eletopo.service.IUserService;
 import net.ddns.ziehlke.eletopo.service.UserService;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-//    private final UserService UserDetailsService;
+//    private final UserRepository userRepository;
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) {
@@ -58,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetails());
+        authProvider.setUserDetailsService(UserDetailsService);
         authProvider.setPasswordEncoder(encoder());
         return authProvider;
     }
@@ -71,7 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    public IUserService userDetails() {
-        return new UserService(null, encoder());
+    public IUserService userDetails(UserRepository userRepository) {
+        return new UserService(userRepository, encoder());
     }
 }
