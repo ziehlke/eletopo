@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
-          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous"/>
+
+    <title>Register</title>
 </head>
 <body>
 <div class="container">
@@ -27,7 +34,8 @@
                                 <input th:field="*{email}" name="username" class="form-control" placeholder="e-mail"
                                        type="email"
                                        required="required"/>
-                                <div class="alert alert-danger col-12" role="alert" th:each="error : ${#fields.errors('email')}"
+                                <div class="alert alert-danger col-12" role="alert"
+                                     th:each="error : ${#fields.errors('email')}"
                                      th:text="${error}">Validation error
                                 </div>
 
@@ -46,7 +54,8 @@
                                     Must
                                     include an uppercase, a lowercase and a digit.
                                 </small>
-                                <div class="alert alert-danger col-12" role="alert" th:each="error : ${#fields.errors('password')}"
+                                <div class="alert alert-danger col-12" role="alert"
+                                     th:each="error : ${#fields.errors('password')}"
                                      th:text="${error}">Validation error
                                 </div>
                             </div> <!-- input-group.// -->
@@ -63,7 +72,8 @@
                                 <small id="matchingPasswordHelp" class="form-text text-muted p-0 col-12">Re-type your
                                     password.
                                 </small>
-                                <div class="alert alert-danger col-12" role="alert" th:each="error : ${#fields.globalErrors()}"
+                                <div class="alert alert-danger col-12" role="alert"
+                                     th:each="error : ${#fields.globalErrors()}"
                                      th:text="${error}">Validation error
                                 </div>
                             </div>
@@ -79,11 +89,5 @@
     </div>
 </div>
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js"
-        integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP"
-        crossorigin="anonymous"></script>
 </body>
 </html>

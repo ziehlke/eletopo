@@ -10,6 +10,9 @@ import net.ddns.ziehlke.eletopo.validation.ValidPassword;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -17,6 +20,8 @@ import javax.validation.constraints.Size;
 @Builder
 @PasswordMatches
 public class UserDto {
+    private UUID id;
+
     @ValidPassword
     @Size(min = 6, max = 30)
     private String password;
@@ -27,5 +32,8 @@ public class UserDto {
     @NotNull
     @ValidEmail
     private String email;
+
+    private Set<Vote> votedRoutes = new HashSet<>();
+
 }
 

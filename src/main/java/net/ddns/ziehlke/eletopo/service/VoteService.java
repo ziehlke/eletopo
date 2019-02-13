@@ -26,16 +26,16 @@ public class VoteService {
     }
 
     public VoteEntity map(Vote vote) {
-        return VoteEntity.builder()
-                .userEntity(userService.map(vote.getUserDto()))
-                .routeEntity(routeService.map(vote.getRoute()))
-                .userGrade(vote.getUserGrade())
-                .build();
+        VoteEntity voteEntity = new VoteEntity();
+        voteEntity.setUserEntity(userService.map(vote.getUserDto()));
+        voteEntity.setRouteEntity(routeService.map(vote.getRoute()));
+        voteEntity.setUserGrade(vote.getUserGrade());
+        return voteEntity;
     }
 
 
-    public Vote save(Vote vote) {
-        return map(voteRepository.save(map(vote)));
+    public void save(Vote vote) {
+        voteRepository.save(map(vote));
     }
 
 

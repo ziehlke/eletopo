@@ -7,6 +7,7 @@ import net.ddns.ziehlke.eletopo.model.Route;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -16,6 +17,7 @@ public class RouteService {
 
     public Route map(RouteEntity routeEntity) {
         return Route.builder()
+                .id(routeEntity.getId())
                 .name(routeEntity.getName())
                 .author(routeEntity.getAuthor())
                 .authorGrade(routeEntity.getAuthorGrade())
@@ -28,6 +30,7 @@ public class RouteService {
 
     public RouteEntity map(Route route) {
         return RouteEntity.builder()
+                .id(route.getId())
                 .name(route.getName())
                 .author(route.getAuthor())
                 .authorGrade(route.getAuthorGrade())
@@ -52,5 +55,9 @@ public class RouteService {
 
     public List<Route> findAllByActiveIsFalse() {
         return routeRepository.findAllByActiveIsFalse().stream().map(this::map).collect(Collectors.toList());
+    }
+
+    public Route findById(UUID id) throws Exception {
+        return map(routeRepository.findById(id).orElseThrow(() -> new Exception("No route with given ID found.")));
     }
 }

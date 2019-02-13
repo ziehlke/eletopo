@@ -3,11 +3,10 @@ package net.ddns.ziehlke.eletopo.service;
 import lombok.RequiredArgsConstructor;
 import net.ddns.ziehlke.eletopo.domain.model.UserEntity;
 import net.ddns.ziehlke.eletopo.domain.repository.UserRepository;
+import net.ddns.ziehlke.eletopo.model.Grade;
+import net.ddns.ziehlke.eletopo.model.Route;
 import net.ddns.ziehlke.eletopo.model.UserDto;
 import net.ddns.ziehlke.eletopo.validation.EmailExistsException;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +18,15 @@ public class UserService implements IUserService {
 
     public UserDto map(UserEntity userEntity) {
         return UserDto.builder()
+                .id(userEntity.getId())
                 .email(userEntity.getEmail())
-//                .password(userEntity.getPassword())
+                .password(userEntity.getPassword())
                 .build();
     }
 
     public UserEntity map(UserDto userDto) {
         return UserEntity.builder()
+                .id(userDto.getId())
                 .email(userDto.getEmail())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .build();
@@ -44,29 +45,10 @@ public class UserService implements IUserService {
         return map(userRepository.findByEmail(email));
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserEntity userEntity = userRepository.findByEmail(email);
-        if (userRepository.findByEmail(email) == null) {
-            throw new UsernameNotFoundException("No user registered with given e-mail.");
-        }
-        return User.builder()
-                .username(userEntity.getEmail())
-                .password(userEntity.getPassword())
-                .disabled(false)
-                .accountExpired(false)
-                .credentialsExpired(false)
-                .accountLocked(false)
-                .authorities("USER")
-                .build();
+
+    public void addRouteVote(Route route, Grade grade) {
     }
 
-    //    // TODO: implement ROLES
-////    private static List<GrantedAuthority> getAuthorities(List<String> roles) {
-////        List<GrantedAuthority> authorities = new ArrayList<>();
-////        for (String role : roles) {
-////            authorities.add(new SimpleGrantedAuthority(role));
-////        }
-////        return authorities;
-////    }
+    public void removeVoteOnRoute(Route route) {
+    }
 }

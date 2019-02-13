@@ -8,12 +8,17 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Route {
+    private UUID id;
+
     @NotNull
     @NotEmpty
     private String name;
@@ -28,7 +33,8 @@ public class Route {
 
     @NotNull
     @NotEmpty
-    @Min(0) @Max(20)
+    @Min(0)
+    @Max(20)
     private LineNo lineNo;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -39,6 +45,8 @@ public class Route {
     private String color;
 
     private boolean active = true;
+
+    private Set<Vote> votedUsers = new HashSet<>();
 
     @Getter
     @AllArgsConstructor
@@ -66,6 +74,6 @@ public class Route {
         TWENTY_FIRST(21);
 
         private int lineNo;
-        }
+    }
 
 }

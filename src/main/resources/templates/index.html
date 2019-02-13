@@ -4,18 +4,25 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/css/bootstrap.min.css"/>
 
     <title>Eletopo</title>
-
 </head>
 <body>
 <div class="container">
 
-    <div sec:authorize="isAuthenticated()">
-        Logged user: <span sec:authentication="name">username</span>
-        Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+    <div class="alert alert-success" sec:authorize="isAuthenticated()">
+        <a href="#" class="close" data-dismiss="alert"
+           aria-label="close">×</a>
+        <strong>Success!</strong>
+        <div>
+            Logged user: <span sec:authentication="name">username</span>
+            Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+        </div>
     </div>
 
 
@@ -30,7 +37,6 @@
             <th scope="col">Date of creation</th>
             <th scope="col">Color</th>
         </tr>
-
         </thead>
 
         <tbody>
@@ -44,7 +50,8 @@
             <td th:text="${route.authorGrade.getKurtyki()}"> Author's grade</td>
 
             <td>
-                <form action="#" th:action="@{/}" th:object="${vote}" method="post" th:name="route" th:value="${route}">
+                <form action="#" th:action="@{/}" th:object="${vote}" method="post">
+                    <input th:type="hidden" th:name="routeId" th:value="${route.id}"/>
                     <select th:field="*{userGrade}" class="form-control" onchange="this.form.submit()">
                         <option value="">-</option>
                         <option th:each="grade : ${T(net.ddns.ziehlke.eletopo.model.Grade).values()}"
@@ -62,14 +69,7 @@
 
         </tbody>
     </table>
-
-
 </div>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js"
-        integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP"
-        crossorigin="anonymous"></script>
+
 </body>
 </html>

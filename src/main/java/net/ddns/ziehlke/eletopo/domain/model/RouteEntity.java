@@ -10,7 +10,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -33,5 +35,5 @@ public class RouteEntity {
     private boolean active;
 
     @OneToMany(mappedBy = "routeEntity")
-    private Set<VoteEntity> votes = new HashSet<>();
+    private Set<VoteEntity> votedUsers = new HashSet<>();
 }
