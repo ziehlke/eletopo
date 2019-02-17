@@ -1,9 +1,6 @@
 package net.ddns.ziehlke.eletopo.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import net.ddns.ziehlke.eletopo.model.Grade;
 import net.ddns.ziehlke.eletopo.model.Route;
 import org.hibernate.annotations.GenericGenerator;
@@ -34,6 +31,9 @@ public class RouteEntity {
     private String color;
     private boolean active;
 
-    @OneToMany(mappedBy = "routeEntity")
+    @OneToMany(mappedBy = "routeEntity",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @EqualsAndHashCode.Exclude
     private Set<VoteEntity> votedUsers = new HashSet<>();
 }

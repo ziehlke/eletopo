@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import net.ddns.ziehlke.eletopo.domain.model.RouteEntity;
 import net.ddns.ziehlke.eletopo.domain.repository.RouteRepository;
 import net.ddns.ziehlke.eletopo.model.Route;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,36 +14,23 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class RouteService {
-    public final RouteRepository routeRepository;
+    private final RouteRepository routeRepository;
+    private final ModelMapper modelMapper;
 
     public Route map(RouteEntity routeEntity) {
-        return Route.builder()
-                .id(routeEntity.getId())
-                .name(routeEntity.getName())
-                .author(routeEntity.getAuthor())
-                .authorGrade(routeEntity.getAuthorGrade())
-                .lineNo(routeEntity.getLineNo())
-                .dateOfCreation(routeEntity.getDateOfCreation())
-                .color(routeEntity.getColor())
-                .active(routeEntity.isActive())
-                .build();
+        return modelMapper.map(routeEntity, Route.class);
     }
 
     public RouteEntity map(Route route) {
-        return RouteEntity.builder()
-                .id(route.getId())
-                .name(route.getName())
-                .author(route.getAuthor())
-                .authorGrade(route.getAuthorGrade())
-                .lineNo(route.getLineNo())
-                .dateOfCreation(route.getDateOfCreation())
-                .color(route.getColor())
-                .active(route.isActive())
-                .build();
+        return modelMapper.map(route, RouteEntity.class);
     }
 
     public void save(Route route) {
         routeRepository.save(map(route));
+    }
+
+    public void save(RouteEntity routeEntity) {
+        routeRepository.save(routeEntity);
     }
 
     public List<Route> findAll() {

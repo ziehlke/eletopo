@@ -8,8 +8,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -46,7 +44,11 @@ public class Route {
 
     private boolean active = true;
 
-    private Set<Vote> votedUsers = new HashSet<>();
+//    private Set<Vote> votedUsers = new HashSet<>();
+
+    private int numberOfVotes;
+
+    private Grade usersGrade;
 
     @Getter
     @AllArgsConstructor

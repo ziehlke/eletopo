@@ -1,6 +1,7 @@
 package net.ddns.ziehlke.eletopo.domain.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import net.ddns.ziehlke.eletopo.model.Grade;
 
@@ -8,11 +9,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data
-//@Builder
 @NoArgsConstructor
 @Entity
 public class VoteEntity {
     @EmbeddedId
+    @EqualsAndHashCode.Exclude
     private VoteEntityID id;
 
     @NotNull
@@ -26,5 +27,6 @@ public class VoteEntity {
     private RouteEntity routeEntity;
 
     @Enumerated(EnumType.ORDINAL)
+    @EqualsAndHashCode.Exclude
     private Grade userGrade;
 }

@@ -50,9 +50,9 @@
             <td th:text="${route.authorGrade.getKurtyki()}"> Author's grade</td>
 
             <td>
-                <form action="#" th:action="@{/}" th:object="${vote}" method="post">
+                <form action="#" th:action="@{/}" method="post">
                     <input th:type="hidden" th:name="routeId" th:value="${route.id}"/>
-                    <select th:field="*{userGrade}" class="form-control" onchange="this.form.submit()">
+                    <select th:name="userGrade" class="form-control" onchange="this.form.submit()">
                         <option value="">-</option>
                         <option th:each="grade : ${T(net.ddns.ziehlke.eletopo.model.Grade).values()}"
                                 th:value="${grade}"
